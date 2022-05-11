@@ -1,0 +1,11 @@
+.Navbar {
+  display: flex;
+  justify-content: space-between;
+}
+
+.buttonWrapper {
+  display: flex;
+  margin: auto;
+  flex-direction: column;
+  width: 200px;
+}
