@@ -1,11 +1,16 @@
-.Navbar {
-  display: flex;
-  justify-content: space-between;
+.Swapspan {
+  color: #5d5fef;
 }
 
-.buttonWrapper {
+.MenuButton {
   display: flex;
   margin: auto;
+}
+
+.MenuItems {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   flex-direction: column;
-  width: 200px;
+  background-color: white;
 }
