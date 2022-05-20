@@ -1,0 +1,28 @@
+{
+  "name": "flashloan",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "private": true,
+  "scripts": {
+    "dev": "yarn workspace @flashloan/frontend dev",
+    "build": "yarn workspace @flashloan/frontend build",
+    "test": "yarn workspace @flashloan/frontend start",
+    "chain": "yarn workspace @flashloan/backend chain",
+    "clean": "yarn workspace @flashloan/backend clean",
+    "deploy": "yarn workspace @flashloan/backend deploy",
+    "compile": "yarn workspace @flashloan/backend compile"
+  },
+  "author": "",
+  "workspaces": {
+    "packages": [
+      "packages/*"
+    ],
+    "nohoist": [
+      "**/@graphprotocol/graph-ts",
+      "**/@graphprotocol/graph-ts/**",
+      "**/backend",
+      "**/backend/**"
+    ]
+  }
+}
