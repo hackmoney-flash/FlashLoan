@@ -26,7 +26,7 @@ export const FlashPlayground = () => {
     signerOrProvider: signerData,
   });
 
-  console.log("flashContract", flashContract);
+  // console.log("flashContract", flashContract);
 
   //   console.log(contractABI);
   const handleGetOwner = async () => {
@@ -56,7 +56,7 @@ export const FlashPlayground = () => {
   };
   return (
     <div>
-      <div>flash</div>
+      <div>flash playground</div>
       <button onClick={() => handleGetOwner()}>get owner</button>
     </div>
   );
