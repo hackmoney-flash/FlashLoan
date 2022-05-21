@@ -4,6 +4,8 @@ import styles from "../styles/Home.module.css";
 import { useState } from "react";
 import { Menu, Transition } from "@headlessui/react";
 
+import { FlashPlayground } from "../components/contract/FlashPlayground";
+
 export default function Home() {
   return (
     <>
@@ -35,6 +37,7 @@ export default function Home() {
           </Transition>
         </Menu>
       </SwapSection>
+      <FlashPlayground />
     </>
   );
 }
