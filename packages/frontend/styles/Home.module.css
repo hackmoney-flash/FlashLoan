@@ -14,3 +14,7 @@
   flex-direction: column;
   background-color: white;
 }
+
+.aLink {
+  margin-left: 20px;
+}
