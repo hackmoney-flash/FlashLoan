@@ -26,19 +26,26 @@ export const Balance = ({}) => {
 
   return (
     <Container>
-      <H3>Balance : {userBalance} USDC</H3>
+      <H3>balance : {userBalance} USDC</H3>
     </Container>
   );
 };
 
 const Container = styled.div`
   display: flex;
-  margin: 1rem 2rem;
 `;
 
 const H3 = styled.h3`
-  font-size: 1.5rem;
   font-weight: bold;
   color: #444;
-  margin: 0rem 1rem;
+
+  margin: 1rem auto;
+
+  font-size: 1rem;
+  @media only screen and (min-width: 640px) {
+    font-size: 1.25rem;
+  }
+  @media only screen and (min-width: 768px) {
+    font-size: 1.5rem;
+  }
 `;
