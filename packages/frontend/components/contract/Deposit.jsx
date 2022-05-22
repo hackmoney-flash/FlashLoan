@@ -1,6 +1,6 @@
 import { useState } from "react";
 import styled from "styled-components";
-import { Card, Button, Input, Balance, CardHeader } from "../elements";
+import { Card, Button, Input, Balance, CardHeader, Loading } from "../elements";
 import { TokenSelect } from "../TokenSelect";
 
 import { useContract, useSigner } from "wagmi";
@@ -16,7 +16,7 @@ import contractABI from "../../contracts/flash.json";
 
 export const Deposit = () => {
   const { data: signerData } = useSigner();
-
+  const [submitting, setSubmitting] = useState(false);
   const [inputAmount, setInputAmount] = useState(0);
 
   const flashContract = useContract({
@@ -28,29 +28,43 @@ export const Deposit = () => {
   // console.log("flashContract", flashContract);
 
   const handleButton = async () => {
-    console.log("inputAmount", inputAmount);
+    setSubmitting(true);
+    // console.log("inputAmount", inputAmount);
     const amount = inputAmount * SIXZERO;
-
-    const tx = await flashContract.depositCollateral(
-      USDCTOKEN,
-      amount.toString(),
-      {
-        gasLimit: "1000000",
-      }
-    );
-    tx.wait(1).then((res) => {
-      console.log("res", res);
-      setInputAmount(0);
-    });
+    try {
+      const tx = await flashContract.depositCollateral(
+        USDCTOKEN,
+        amount.toString(),
+        {
+          gasLimit: "1000000",
+        }
+      );
+      tx.wait(1).then((res) => {
+        setInputAmount(0);
+        setSubmitting(false);
+      });
+    } catch (e) {
+      setSubmitting(false);
+    }
   };
   const handleOnChange = (e) => {
     // console.log("handleOnChange", e.target.value);
     setInputAmount(e.target.value);
   };
 
+  if (submitting)
+    return (
+      <Card className={`${className}`}>
+        <CardHeader>deposit</CardHeader>
+        <Loading />
+        {/* <Button onClick={() => handleButton()}>deposit</Button> */}
+        <Balance />
+      </Card>
+    );
+
   return (
     <Card>
-      <CardHeader>Deposit</CardHeader>
+      <CardHeader>deposit</CardHeader>
       <InputContainer>
         <Input
           type="number"

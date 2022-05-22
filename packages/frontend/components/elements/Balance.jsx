@@ -10,7 +10,7 @@ export const Balance = ({}) => {
   const [userBalance, setUserBalance] = useState(0);
 
   const daiContract = useContract({
-    addressOrName: DAITOKEN,
+    addressOrName: USDCTOKEN,
     contractInterface: erc20ABI,
     signerOrProvider: signerData,
   });
@@ -18,7 +18,7 @@ export const Balance = ({}) => {
   useEffect(() => {
     const getBalance = async () => {
       const balance = await daiContract.balanceOf(accountData.address);
-      setUserBalance(balance.toString() / EIGHTEENZERO);
+      setUserBalance(balance.toString() / SIXZERO);
     };
 
     if (daiContract.signer && accountData.address) getBalance();
@@ -26,7 +26,7 @@ export const Balance = ({}) => {
 
   return (
     <Container>
-      <H3>Balance : {userBalance}</H3>
+      <H3>Balance : {userBalance} USDC</H3>
     </Container>
   );
 };
