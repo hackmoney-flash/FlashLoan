@@ -12,7 +12,8 @@ const CardContainer = styled.div`
     0 2rem 2rem 0 rgba(93, 95, 239, 0.1);
   display: flex;
   flex-direction: column;
-  min-height: 300px;
+  justify-content: center;
+  min-height: 400px;
   padding: 1rem;
   margin: 2rem 0;
 `;

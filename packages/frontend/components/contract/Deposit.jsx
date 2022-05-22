@@ -18,6 +18,7 @@ export const Deposit = () => {
   const { data: signerData } = useSigner();
   const [submitting, setSubmitting] = useState(false);
   const [inputAmount, setInputAmount] = useState(0);
+  const [transactionComplete, setTransactionComplete] = useState("");
 
   const flashContract = useContract({
     addressOrName: CONTRACT_ADDRESS,
@@ -29,6 +30,7 @@ export const Deposit = () => {
 
   const handleButton = async () => {
     setSubmitting(true);
+    setTransactionComplete("");
     // console.log("inputAmount", inputAmount);
     const amount = inputAmount * SIXZERO;
     try {
@@ -41,9 +43,11 @@ export const Deposit = () => {
       );
       tx.wait(1).then((res) => {
         setInputAmount(0);
+        setTransactionComplete("Deposit Completed");
         setSubmitting(false);
       });
     } catch (e) {
+      setTransactionComplete("Deposit Failed");
       setSubmitting(false);
     }
   };
@@ -55,7 +59,7 @@ export const Deposit = () => {
   if (submitting)
     return (
       <Card>
-        <CardHeader>deposit</CardHeader>
+        {/* <CardHeader>deposit</CardHeader> */}
         <Loading />
         {/* <Button onClick={() => handleButton()}>deposit</Button> */}
         <Balance />
@@ -64,7 +68,7 @@ export const Deposit = () => {
 
   return (
     <Card>
-      <CardHeader>deposit</CardHeader>
+      {/* <CardHeader>deposit</CardHeader> */}
       <InputContainer>
         <Input
           type="number"
@@ -76,6 +80,7 @@ export const Deposit = () => {
 
       <Button onClick={() => handleButton()}>deposit</Button>
       <Balance />
+      <Completed>{transactionComplete}</Completed>
     </Card>
   );
 };
@@ -95,4 +100,11 @@ const InputContainer = styled.div`
     background-color: rgba(93, 95, 239, 0.05);
     border-color: rgba(93, 95, 239, 0.2);
   }
+`;
+
+const Completed = styled.div`
+  color: rgba(93, 95, 239);
+  font-weight: bold;
+  font-size: 1.2rem;
+  text-align: center;
 `;

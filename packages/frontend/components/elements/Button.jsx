@@ -11,7 +11,10 @@ const ButtonContainer = styled.button`
   box-shadow: 0 0.5rem 0.5rem 0 rgba(93, 95, 239, 0.1),
     0 2rem 2rem 0 rgba(93, 95, 239, 0.06);
   display: flex;
-  padding: 10px 125px;
+  padding: 10px;
+  width: 100%;
+  justify-content: center;
+
   font-size: 1.5rem;
   font-weight: bold;
   color: #444;

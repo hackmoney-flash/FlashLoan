@@ -16,6 +16,7 @@ import contractABI from "../../contracts/flash.json";
 
 export const Withdrawl = () => {
   const [submitting, setSubmitting] = useState(false);
+  const [transactionComplete, setTransactionComplete] = useState("");
 
   const { data: signerData } = useSigner();
 
@@ -29,6 +30,7 @@ export const Withdrawl = () => {
 
   const handleButton = async () => {
     setSubmitting(true);
+    setTransactionComplete("");
 
     try {
       const tx = await flashContract.withdrawToken(USDCTOKEN, {
@@ -36,9 +38,11 @@ export const Withdrawl = () => {
       });
       tx.wait(1).then(() => {
         setInputAmount(0);
+        setTransactionComplete("Withdrawl Completed");
         setSubmitting(false);
       });
     } catch (e) {
+      setTransactionComplete("Withdrawl Failed");
       setSubmitting(false);
     }
   };
@@ -46,7 +50,7 @@ export const Withdrawl = () => {
   if (submitting)
     return (
       <Card>
-        <CardHeader>withdrawl</CardHeader>
+        {/* <CardHeader>withdrawl</CardHeader> */}
         <Loading />
 
         {/* <Button onClick={() => handleButton()}>withdrawl</Button> */}
@@ -56,11 +60,19 @@ export const Withdrawl = () => {
 
   return (
     <Card>
-      <CardHeader>withdrawl</CardHeader>
+      {/* <CardHeader>withdrawl</CardHeader> */}
       {/* <div>in contract : </div> */}
       {/* <TokenSelect /> */}
       <Button onClick={() => handleButton()}>withdrawl</Button>
       <Balance />
+      <Completed>{transactionComplete}</Completed>
     </Card>
   );
 };
+
+const Completed = styled.div`
+  color: rgba(93, 95, 239);
+  font-weight: bold;
+  font-size: 1.2rem;
+  text-align: center;
+`;

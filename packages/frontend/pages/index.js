@@ -20,9 +20,24 @@ export default function Home() {
       </Navbar>
       <Container>
         <SwapNavigation>
-          <NavButton onClick={() => setNav("swap")}>Swap</NavButton>
-          <NavButton onClick={() => setNav("deposit")}>Deposit</NavButton>
-          <NavButton onClick={() => setNav("withdrawl")}>Withdrawl</NavButton>
+          <NavButton
+            onClick={() => setNav("swap")}
+            activeStyle={nav === "swap"}
+          >
+            Swap
+          </NavButton>
+          <NavButton
+            onClick={() => setNav("deposit")}
+            activeStyle={nav === "deposit"}
+          >
+            Deposit
+          </NavButton>
+          <NavButton
+            onClick={() => setNav("withdrawl")}
+            activeStyle={nav === "withdrawl"}
+          >
+            Withdrawl
+          </NavButton>
         </SwapNavigation>
         {nav === "swap" && <FlashCard />}
         {nav === "deposit" && <Deposit />}
@@ -61,9 +76,18 @@ const NavButton = styled.button`
   &:hover {
     color: #111;
     background: rgba(93, 95, 239, 0.1);
-    box-shadow: 0 1rem 1rem 0 rgba(0, 0, 0, 0.1),
-      0 1px 5px 0 rgba(0, 0, 0, 0.06);
+    box-shadow: 0 1rem 1rem 0 rgba(93, 95, 239, 0.1),
+      0 1px 5px 0 rgba(93, 95, 239, 0.06);
   }
+  color: ${(props) => (props.activeStyle ? "#222" : "#666")};
+
+  background: ${(props) =>
+    props.activeStyle ? "rgba(93, 95, 239, 0.1)" : "#fff"};
+
+  box-shadow: ${(props) =>
+    props.activeStyle
+      ? "0 1rem 1rem 0 rgba(0, 0, 0, 0.1), 0 1px 5px 0 rgba(0, 0, 0, 0.06)"
+      : "none"};
 `;
 
 const Container = styled.div`

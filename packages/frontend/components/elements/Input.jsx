@@ -23,6 +23,7 @@ const InputContainer = styled.input`
   font-weight: bold;
   color: #444;
   background-color: transparent;
+  width: 100%;
 
   padding: 0.5rem 0.5rem;
   font-size: 1rem;
