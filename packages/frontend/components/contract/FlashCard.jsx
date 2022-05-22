@@ -5,7 +5,7 @@ import { useAccount, useContract, useSigner, erc20ABI } from "wagmi";
 const contractAddress = "0x93e6587f96c3a3D4A77Eb44d5ef3Fe1c0B34AB61";
 import contractABI from "../../contracts/flash.json";
 
-const DAI = "0x8f3Cf7ad23Cd3CaDbD9735AFf958023239c6A063";
+// const DAI = "0x8f3Cf7ad23Cd3CaDbD9735AFf958023239c6A063";
 const DAITOKEN = "0x4aAded56bd7c69861E8654719195fCA9C670EB45";
 
 import { Card, Button } from "../elements";
@@ -52,7 +52,7 @@ export const FlashCard = ({ children, className }) => {
       setUserBalance(balance.toString());
     };
 
-    if (daiContract.signer) getBalance();
+    if (daiContract.signer && accountData.address) getBalance();
   }, [accountData, daiContract]);
 
   return (
@@ -76,7 +76,6 @@ export const FlashCard = ({ children, className }) => {
 };
 
 const Header = styled.h1`
-  display: flex;
   font-size: 1.5rem;
   font-weight: bold;
   color: #444;

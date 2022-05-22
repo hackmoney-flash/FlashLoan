@@ -55,9 +55,13 @@ export const FlashPlayground = () => {
     });
   };
   return (
-    <div>
+    <Container>
       <div>flash playground</div>
       <button onClick={() => handleGetOwner()}>get owner</button>
-    </div>
+    </Container>
   );
 };
+
+const Container = styled.div`
+  margin: 2rem 5rem;
+`;
