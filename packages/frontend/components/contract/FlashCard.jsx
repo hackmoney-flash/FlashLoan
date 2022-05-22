@@ -1,17 +1,22 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import styled from "styled-components";
-import { useAccount, useContract, useSigner, erc20ABI } from "wagmi";
-import { CONTRACT_ADDRESS, DAITOKEN } from "../../constants";
+import { useContract, useSigner } from "wagmi";
+import {
+  CONTRACT_ADDRESS,
+  DAITOKEN,
+  EIGHTEENZERO,
+  USDCTOKEN,
+  SIXZERO,
+} from "../../constants";
 
 import contractABI from "../../contracts/flash.json";
 
-import { Card, Button } from "../elements";
+import { Card, Button, Balance, Input, CardHeader } from "../elements";
+import { TokenSelect } from "../TokenSelect";
 
 export const FlashCard = ({ children, className }) => {
   const [inputAmount, setInputAmount] = useState(0);
-  const [userBalance, setUserBalance] = useState(0);
   const { data: signerData } = useSigner();
-  const { data: accountData } = useAccount();
 
   const flashContract = useContract({
     addressOrName: CONTRACT_ADDRESS,
@@ -19,19 +24,13 @@ export const FlashCard = ({ children, className }) => {
     signerOrProvider: signerData,
   });
 
-  const daiContract = useContract({
-    addressOrName: DAITOKEN,
-    contractInterface: erc20ABI,
-    signerOrProvider: signerData,
-  });
-
   const handleButton = async () => {
-    console.log("button clicked");
-    const amount = inputAmount * 10 ** 18;
-    console.log("amount", amount);
+    // console.log("button clicked");
+    const amount = inputAmount * SIXZERO;
+    // console.log("amount", amount);
 
     const tx = await flashContract.createFlashLoan(
-      [DAITOKEN],
+      [USDCTOKEN],
       [amount.toString()],
       {
         gasLimit: "1000000",
@@ -43,49 +42,23 @@ export const FlashCard = ({ children, className }) => {
     });
   };
 
-  useEffect(() => {
-    const getBalance = async () => {
-      const balance = await daiContract.balanceOf(accountData.address);
-      setUserBalance(balance.toString());
-    };
-
-    if (daiContract.signer && accountData.address) getBalance();
-  }, [accountData, daiContract]);
-
   return (
     <Card className={`${className}`}>
-      <Header>swap position</Header>
-      <div>
-        <InputContainer>
-          <Input
-            type="number"
-            placeholder="0.0"
-            onChange={(e) => setInputAmount(e.target.value)}
-          />
-          <H2>DAI</H2>
-        </InputContainer>
-        <H2>Balance : {userBalance}</H2>
+      <CardHeader>swap position</CardHeader>
+      <InputContainer>
+        <Input
+          type="number"
+          placeholder="0.0"
+          onChange={(e) => setInputAmount(e.target.value)}
+        />
+        <TokenSelect />
+      </InputContainer>
 
-        <Button onClick={() => handleButton()}>swap</Button>
-      </div>
+      <Button onClick={() => handleButton()}>swap</Button>
+      <Balance />
     </Card>
   );
 };
-
-const Header = styled.h1`
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: #444;
-  text-align: left;
-  margin: 1rem 0;
-`;
-
-const H2 = styled.h2`
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: #444;
-  margin: 0rem 1rem;
-`;
 
 const InputContainer = styled.div`
   display: flex;
@@ -102,19 +75,4 @@ const InputContainer = styled.div`
     background-color: #f5f5f5;
     border-color: #d6d6d6;
   }
-`;
-
-const Input = styled.input`
-  border: 0px;
-  outline: 0px;
-
-  margin-top: 20px;
-  margin-bottom: 20px;
-
-  display: flex;
-  flex-direction: column;
-  padding: 10px 100px;
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: #444;
 `;
