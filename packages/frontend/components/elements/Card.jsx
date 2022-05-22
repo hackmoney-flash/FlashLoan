@@ -8,10 +8,11 @@ const CardContainer = styled.div`
   background-color: #fff;
   border: #e6e6e6 1px solid;
   border-radius: 20px;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 3px 0 rgba(0, 0, 0, 0.06);
+  box-shadow: 0 0.75rem 0.75rem 0 rgba(93, 95, 239, 0.2),
+    0 2rem 2rem 0 rgba(93, 95, 239, 0.1);
   display: flex;
   flex-direction: column;
   min-height: 300px;
   padding: 1rem;
-  margin: 2rem 10rem;
+  margin: 2rem 0;
 `;

@@ -15,22 +15,19 @@ export default function Home() {
         <h1>
           Flash<span className={styles.Swapspan}>Swap</span>
         </h1>
-        <SwapNavigation>
-          <button className={styles.aLink} onClick={() => setNav("swap")}>
-            Swap
-          </button>
-          <button className={styles.aLink} onClick={() => setNav("deposit")}>
-            Deposit
-          </button>
-          <button className={styles.aLink} onClick={() => setNav("withdrawl")}>
-            Withdrawl
-          </button>
-        </SwapNavigation>
+
         <ConnectButton />
       </Navbar>
-      {nav === "swap" && <FlashCard />}
-      {nav === "deposit" && <Deposit />}
-      {nav === "withdrawl" && <Withdrawl />}
+      <Container>
+        <SwapNavigation>
+          <NavButton onClick={() => setNav("swap")}>Swap</NavButton>
+          <NavButton onClick={() => setNav("deposit")}>Deposit</NavButton>
+          <NavButton onClick={() => setNav("withdrawl")}>Withdrawl</NavButton>
+        </SwapNavigation>
+        {nav === "swap" && <FlashCard />}
+        {nav === "deposit" && <Deposit />}
+        {nav === "withdrawl" && <Withdrawl />}
+      </Container>
     </>
   );
 }
@@ -39,5 +36,52 @@ const Navbar = styled.nav`
   display: flex;
   justify-content: space-between;
   margin: 2rem; 
+  }
+`;
+
+const NavButton = styled.button`
+  width: 100%;
+  border: none;
+  background: none;
+  cursor: pointer;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: bold;
+  color: #444;
+  padding: 1rem;
+  margin: 0;
+  text-transform: uppercase;
+  @media only screen and (min-width: 640px) {
+    font-size: 1rem;
+  }
+  @media only screen and (min-width: 768px) {
+    font-size: 1.25rem;
+  }
+
+  &:hover {
+    color: #111;
+    background: rgba(93, 95, 239, 0.1);
+    box-shadow: 0 1rem 1rem 0 rgba(0, 0, 0, 0.1),
+      0 1px 5px 0 rgba(0, 0, 0, 0.06);
+  }
+`;
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  margin-top: 6rem;
+  padding: 0rem 1rem;
+  @media only screen and (min-width: 640px) {
+    padding: 0rem 4rem;
+  }
+  @media only screen and (min-width: 768px) {
+    padding: 0rem 8rem;
+  }
+  @media only screen and (min-width: 1024px) {
+    padding: 0rem 12rem;
+  }
+  @media only screen and (min-width: 1280px) {
+    padding: 0rem 20rem;
   }
 `;

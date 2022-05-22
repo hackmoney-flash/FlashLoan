@@ -45,7 +45,7 @@ export const Withdrawl = () => {
 
   if (submitting)
     return (
-      <Card className={`${className}`}>
+      <Card>
         <CardHeader>withdrawl</CardHeader>
         <Loading />
 
@@ -58,6 +58,7 @@ export const Withdrawl = () => {
     <Card>
       <CardHeader>withdrawl</CardHeader>
       {/* <div>in contract : </div> */}
+      {/* <TokenSelect /> */}
       <Button onClick={() => handleButton()}>withdrawl</Button>
       <Balance />
     </Card>
