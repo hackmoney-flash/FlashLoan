@@ -11,11 +11,12 @@ import {
 
 import contractABI from "../../contracts/flash.json";
 
-import { Card, Button, Balance, Input, CardHeader } from "../elements";
+import { Card, Button, Balance, Input, CardHeader, Loading } from "../elements";
 import { TokenSelect } from "../TokenSelect";
 
 export const FlashCard = ({ children, className }) => {
   const [inputAmount, setInputAmount] = useState(0);
+  const [submitting, setSubmitting] = useState(false);
   const { data: signerData } = useSigner();
 
   const flashContract = useContract({
@@ -25,22 +26,36 @@ export const FlashCard = ({ children, className }) => {
   });
 
   const handleButton = async () => {
-    // console.log("button clicked");
+    setSubmitting(true);
     const amount = inputAmount * SIXZERO;
     // console.log("amount", amount);
-
-    const tx = await flashContract.createFlashLoan(
-      [USDCTOKEN],
-      [amount.toString()],
-      {
-        gasLimit: "1000000",
-      }
-    ); // Borrow 1000 DAI in a Flash Loan with no upfront collateral
-    tx.wait(1).then((res) => {
-      console.log("res", res);
-      setInputAmount(0);
-    });
+    try {
+      const tx = await flashContract.createFlashLoan(
+        [USDCTOKEN],
+        [amount.toString()],
+        {
+          gasLimit: "1000000",
+        }
+      );
+      tx.wait(1).then(() => {
+        setInputAmount(0);
+        setSubmitting(false);
+      });
+    } catch (e) {
+      setSubmitting(false);
+    }
   };
+
+  if (submitting)
+    return (
+      <Card className={`${className}`}>
+        <CardHeader>swap position</CardHeader>
+        <Loading />
+
+        {/* <Button onClick={() => handleButton()}>swap</Button> */}
+        <Balance />
+      </Card>
+    );
 
   return (
     <Card className={`${className}`}>
