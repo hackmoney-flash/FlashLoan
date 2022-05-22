@@ -70,6 +70,13 @@
   },
   {
     "inputs": [],
+    "name": "INTEREST_RATE_MODE",
+    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
     "name": "POOL",
     "outputs": [
       { "internalType": "contract IPool", "name": "", "type": "address" }
@@ -86,10 +93,30 @@
   },
   {
     "inputs": [
+      { "internalType": "address", "name": "asset", "type": "address" },
+      { "internalType": "uint256", "name": "amount", "type": "uint256" }
+    ],
+    "name": "borrowCollateral",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
       { "internalType": "address[]", "name": "assets", "type": "address[]" },
       { "internalType": "uint256[]", "name": "amounts", "type": "uint256[]" }
     ],
     "name": "createFlashLoan",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "asset", "type": "address" },
+      { "internalType": "uint256", "name": "amount", "type": "uint256" }
+    ],
+    "name": "depositCollateral",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -116,7 +143,30 @@
   },
   {
     "inputs": [],
+    "name": "poolAddressesProviderRegistry",
+    "outputs": [
+      {
+        "internalType": "contract IPoolAddressesProviderRegistry",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
     "name": "renounceOwnership",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "asset", "type": "address" },
+      { "internalType": "uint256", "name": "amount", "type": "uint256" }
+    ],
+    "name": "repayCollateral",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -126,6 +176,17 @@
       { "internalType": "uint256", "name": "amountIn", "type": "uint256" }
     ],
     "name": "swapExactInputSingle",
+    "outputs": [
+      { "internalType": "uint256", "name": "amountOut", "type": "uint256" }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint256", "name": "amountIn", "type": "uint256" }
+    ],
+    "name": "swapExactInputSingleOut",
     "outputs": [
       { "internalType": "uint256", "name": "amountOut", "type": "uint256" }
     ],
@@ -153,6 +214,16 @@
       { "internalType": "address", "name": "newOwner", "type": "address" }
     ],
     "name": "transferOwnership",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "asset", "type": "address" },
+      { "internalType": "uint256", "name": "amount", "type": "uint256" }
+    ],
+    "name": "withdrawCollateral",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"

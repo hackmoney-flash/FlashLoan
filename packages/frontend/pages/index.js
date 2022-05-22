@@ -3,8 +3,16 @@ import { ConnectButton } from "@rainbow-me/rainbowkit";
 import styles from "../styles/Home.module.css";
 import { useState } from "react";
 
-import { FlashPlayground, FlashCard, Deposit } from "../components/contract";
+
+import {
+  
+  FlashCard,
+  Deposit,
+  Withdrawl,
+} from "../components/contract";
+
 import { SwapNavigation } from "../components/elements/SwapNavigation";
+
 
 export default function Home() {
   return (
@@ -23,6 +31,7 @@ export default function Home() {
       </Navbar>
       <FlashCard />
       <Deposit />
+      <Withdrawl />
     </>
   );
 }
