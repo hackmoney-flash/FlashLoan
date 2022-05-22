@@ -5,7 +5,7 @@ import { CONTRACT_ADDRESS, DAITOKEN } from "../../constants";
 
 import contractABI from "../../contracts/flash.json";
 
-export const Deposit = () => {
+export const Withdrawl = () => {
   const { data: signerData } = useSigner();
   const { data: accountData } = useAccount();
 
@@ -15,7 +15,7 @@ export const Deposit = () => {
     signerOrProvider: signerData,
   });
 
-  // console.log("flashContract", flashContract);
+  //   console.log("flashContract", flashContract);
 
   const daiContract = useContract({
     addressOrName: DAITOKEN,
@@ -23,11 +23,10 @@ export const Deposit = () => {
     signerOrProvider: signerData,
   });
 
-  // console.log("daiContract", daiContract);
-
+  //   console.log("daiContract", daiContract);
   return (
     <Card>
-      <div>Deposit</div>
+      <div>Withdrawl</div>
     </Card>
   );
 };

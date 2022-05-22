@@ -3,7 +3,12 @@ import { ConnectButton } from "@rainbow-me/rainbowkit";
 import styles from "../styles/Home.module.css";
 import { useState } from "react";
 
-import { FlashPlayground, FlashCard, Deposit } from "../components/contract";
+import {
+  FlashPlayground,
+  FlashCard,
+  Deposit,
+  Withdrawl,
+} from "../components/contract";
 
 export default function Home() {
   return (
@@ -18,6 +23,7 @@ export default function Home() {
       <FlashPlayground />
       <FlashCard />
       <Deposit />
+      <Withdrawl />
     </>
   );
 }
